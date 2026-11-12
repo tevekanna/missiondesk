@@ -1,0 +1,12 @@
+# Rust/Cargo build output
+src-tauri/target/
+
+# Node
+node_modules/
+dist/
+
+# Tauri generated schemas
+src-tauri/gen/schemas
+
+# Local scratch files and tool logs
+scratch/

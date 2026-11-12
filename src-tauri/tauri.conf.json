@@ -1,0 +1,44 @@
+{
+  "build": {
+    "beforeDevCommand": "",
+    "beforeBuildCommand": "",
+    "devPath": "../app",
+    "distDir": "../app"
+  },
+  "package": {
+    "productName": "MissionDesk",
+    "version": "3.0.29"
+  },
+  "tauri": {
+    "allowlist": {
+  "all": false,
+  "shell": { "open": true },
+  "protocol": { "asset": true, "assetScope": ["**"] }
+},
+    "windows": [
+      {
+        "title": "MissionDesk",
+        "width": 1280,
+        "height": 1180,
+        "minWidth": 800,
+        "minHeight": 600,
+        "center": true,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": { "csp": null },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.MissionDesk.app",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ]
+    }
+  }
+}

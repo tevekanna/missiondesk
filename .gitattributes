@@ -1,0 +1,8 @@
+# Force LF line endings in the repository for all text files.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary
+*.icns binary
+*.pdf binary

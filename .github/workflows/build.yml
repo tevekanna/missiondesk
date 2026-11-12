@@ -1,0 +1,43 @@
+name: Build MissionDesk (.exe)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install npm packages
+        run: npm install
+
+      - name: Stamp the version from app/js/version.js
+        run: |
+          node -e "const fs = require('fs'); const p = 'package.json'; const t = 'src-tauri/tauri.conf.json'; const v = fs.readFileSync('app/js/version.js','utf8').match(/'([0-9.]+)'/)[1]; let pd = JSON.parse(fs.readFileSync(p)); pd.version = v; fs.writeFileSync(p, JSON.stringify(pd, null, 2)); if(fs.existsSync(t)){let td = JSON.parse(fs.readFileSync(t)); if(td.package) td.package.version = v; else td.version = v; fs.writeFileSync(t, JSON.stringify(td, null, 2));} console.log('version ->', v);"
+
+      - name: Show tauri.conf.json after stamping
+        run: type src-tauri\tauri.conf.json
+
+      - name: Debug info
+        run: npx tauri info
+
+      - name: Build the Tauri app (.exe)
+        run: npx tauri build
+
+      - name: Upload the installer as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MissionDesk-v3.${{ github.run_number }}
+          path: src-tauri/target/release/bundle/nsis/*.exe
