@@ -50,11 +50,15 @@ compliance.
 ### Status
 
 The risk assessment shown in the application is calculated by `app/js/igrc.js`
-(ground risk) and `app/js/arc.js` (air risk), together with logic in
-`app/js/app.js`. The modules `category.js`, `containment.js`, `oso.js` and the
+(ground risk), `app/js/arc.js` (air risk) and `app/js/containment.js`
+(Step #8, Tables 8–13), together with logic in `app/js/app.js`. The modules
+`category.js` (including the October 2026 PDRAs), `oso.js` and the
 orchestrator `sora.js` are a newer, stand-alone implementation of the full
 pipeline. They are part of the repository but are **not yet loaded** by the
 user interface.
+
+The tables follow the AMC and GM to Regulation (EU) 2019/947, Issue 1,
+Amendment 5 (EASA ED Decision 2026/010/R of 16 November 2026).
 
 ## Your data
 
