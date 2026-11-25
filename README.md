@@ -49,13 +49,21 @@ compliance.
 
 ### Status
 
-The risk assessment shown in the application is calculated by `app/js/igrc.js`
-(ground risk), `app/js/arc.js` (air risk) and `app/js/containment.js`
-(Step #8, Tables 8–13), together with logic in `app/js/app.js`. The modules
-`category.js` (including the October 2026 PDRAs), `oso.js` and the
-orchestrator `sora.js` are a newer, stand-alone implementation of the full
-pipeline. They are part of the repository but are **not yet loaded** by the
-user interface.
+The risk assessment shown in the application is produced by one pipeline,
+`app/js/sora.js`, which runs the steps in order and stops with a stated reason
+when a step cannot be completed:
+
+| Step | Module |
+|---|---|
+| Category check (Open, STS, PDRA, Specific, Certified) | `category.js` |
+| Steps #2–#3, ground risk | `igrc.js` |
+| Steps #4–#7, air risk and SAIL | `arc.js` |
+| Step #8, containment (Tables 8–13) | `containment.js` |
+| Step #9, operational safety objectives (Table 14) | `oso.js` |
+
+The category check compares the category you selected with what you entered.
+It is an aid: several conditions (for example remote pilot competency) cannot
+be checked by the application and are listed for you to verify.
 
 The tables follow the AMC and GM to Regulation (EU) 2019/947, Issue 1,
 Amendment 5 (EASA ED Decision 2026/010/R of 16 November 2026).
